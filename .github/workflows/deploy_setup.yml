@@ -11,8 +11,17 @@ jobs:
     permissions:
       id-token: write # Required for OIDC authentication
       contents: read  # Required to check out the repository
-      
+    if: github.repository == 'Galaxia5987/frc-train'
     steps:
+      - name: Verify Secret is Loaded
+        run: |
+          if [ -z "${{ secrets.AWS_ROLE_ARN }}" ]; then
+            echo "❌ ERROR: The AWS_ROLE_ARN secret is empty!"
+            exit 1
+          else
+            echo "✅ Secret is populated."
+          fi
+
       - name: Checkout code
         uses: actions/checkout@v6
       

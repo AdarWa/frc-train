@@ -17,7 +17,6 @@ class GitHubActionsManager:
     def __init__(self, logger: logging.Logger, token: str, repo: str | None, api_version: str = "2026-03-10") -> None:
         self.logger = logger
         self.repo = repo
-        self.base_url = f"https://api.github.com/repos/{repo}"
         
         # Use a session to persist headers and optimize connection pooling
         self.session = requests.Session()
@@ -29,6 +28,8 @@ class GitHubActionsManager:
         
         if not repo:
             self.repo = f"{self.fetch_user_info()}/frc-train"
+            
+        self.base_url = f"https://api.github.com/repos/{repo}"
             
             
     def fetch_user_info(self):

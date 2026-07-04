@@ -50,14 +50,23 @@ jobs:
           git checkout main
           
           for branch in $(git branch -r | grep 'origin/' | grep -v 'origin/main' | grep -v 'HEAD'); do
-            clean_branch_name=${branch#origin/}
+            # branch contains "origin/branch-name", so we strip the whitespace and "origin/"
+            # to get just the branch name
+            clean_branch_name=$(echo "$branch" | sed 's/^[[:space:]]*origin\///')
             
             echo "Creating PR for: $clean_branch_name"
+            
+            # Check if TASK.md exists on the target branch and extract its content
+            if git show "origin/$clean_branch_name:TASK.md" >/dev/null 2>&1; then
+              PR_BODY=$(git show "origin/$clean_branch_name:TASK.md")
+            else
+              PR_BODY="This PR was automatically generated for $clean_branch_name."
+            fi
             
             gh pr create \
               --base main \
               --head "$clean_branch_name" \
               --title "Task $clean_branch_name" \
-              --body "This PR was automatically generated for $clean_branch_name." \
+              --body "$PR_BODY" \
               || true 
           done

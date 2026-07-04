@@ -27,9 +27,10 @@ class GitHubActionsManager:
         })
         
         if not repo:
-            self.repo = f"{self.fetch_user_info()}/frc-train"
+            self.user = self.fetch_user_info()
+            self.repo = f"{self.user}/frc-train"
             
-        self.base_url = f"https://api.github.com/repos/{repo}"
+        self.base_url = f"https://api.github.com/repos/{self.repo}"
             
             
     def fetch_user_info(self):

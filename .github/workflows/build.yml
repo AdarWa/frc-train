@@ -17,9 +17,9 @@ jobs:
       - name: Check if new commits were made
         run: |
           # Fail the step if the latest commit message begins with "Initialize task"
-          COMMIT_MESSAGE=$(git log -1 --pretty=format:'%s')
+          COMMIT_MESSAGE=$(git log -2 --pretty=format:'%s' | grep -o "Initialize task")
           echo $COMMIT_MESSAGE
-          if [[ "$COMMIT_MESSAGE" == "Initialize task"* ]]; then
+          if [[ "$COMMIT_MESSAGE" == "Initialize task" ]]; then
             echo "Error: The last commit message starts with 'Initialize task'."
             exit 1
           fi

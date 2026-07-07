@@ -1,6 +1,6 @@
 # basic-subsystem
 
-Create a basic intake subsystem.
+Create a basic intake subsystem.d
 
 ## Description
 

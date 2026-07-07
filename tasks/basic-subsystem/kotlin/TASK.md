@@ -18,12 +18,5 @@ It should have the following public methods(add as many as you want, but these a
 
 It should have one motor controlled by a `VoltageOut` control request.
 
-**IMPORTANT!**
-The motor's inputs must be exposed through the subsystem, add this:
-```kotlin
-val inputs
-    get() = motor.inputs
-```
-
 ## Dependencies
 None

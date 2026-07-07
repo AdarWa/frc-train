@@ -14,9 +14,6 @@ object Intake : SubsystemBase() {
         config = MOTOR_CONFIG,
     )
 
-    val inputs
-        get() = motor.inputs
-
     private val voltageOut = VoltageOut(0.0)
 
     private fun setVoltage(voltage: Voltage): Command = runOnce {

@@ -9,4 +9,4 @@ val INTAKE_VOLTAGE = 5.volts
 val OUTTAKE_VOLTAGE = (-5).volts
 
 val MOTOR_CONFIG =
-    TalonFXConfiguration()
+    TalonFXConfiguration() // Add current limits, neutral mode, etc...

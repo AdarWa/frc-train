@@ -9,22 +9,8 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  fail-on-no-commits:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Check if new commits were made
-        run: |
-          # Fail if the latest commit was authored by the GitHub Actions bot
-          AUTHOR=$(git log -1 --pretty=format:'%an')
-          if [[ "$AUTHOR" == *"github-actions"* || "$AUTHOR" == *"GitHub Actions"* ]]; then
-            echo "Error: The last commit is from GitHub Actions."
-            exit 1
-          fi
-
+  # This workflow contains a single job called "build"
   build:
-    needs: fail-on-no-commits
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
